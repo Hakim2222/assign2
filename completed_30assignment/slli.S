@@ -7,15 +7,15 @@ RVTEST_RV64U
 RVTEST_CODE_BEGIN
 
     # ---- your code here -------------------------------------------------
-    sltiu:
-    # Example: compute 3 + 4. Replace with your own instructions.
-    li   t0, 100                 #t0 not equal with x0(permanent 0)
-    li   t4,50
-    sltiu  t2, t4, -1            # your result in t2,expect rs1 is set when met requirement,it is unsigned number
-                                 #-1 is consider 0xffffffffffff1,when unsigned commands is used,obviously it fail as imm>rs1
+    #SLLI is a logical left shift (zeros are shifted into the lower bits)
+    # Example:
+    li   t0, 12                #t0 not equal with x0(permanent 0)
+    li   t4,-2
+    slli  t2,t0,2           # your result in t2,
+    #let say 1100(12) it shift to the left by imm by 2 (so it become 110000 which is 48 decimal)
 
     # ---- self-check: PASS if t2 == expected -----------------------------
-    li   t3, 1                # TODO: set the value you expect
+    li   t3, 48                # TODO: set the value you expect(1100< in binary)
     bne  t2, t3, fail
     # ---------------------------------------------------------------------
 
